@@ -1,167 +1,272 @@
+<!-- ===================================================
+  Infraestructura Crítica (ESGC)
+  Página demo modernizada | Jul‑2025
+  Inspirada en el look & feel de ADF Careers – ADFA page, conservando la paleta azul institucional.
+  Incluye: AOS animations, navbar responsive, hero con escudo, secciones Integrantes y Conclusiones añadidas, mapa embebido, galería y footer.
+  Última modificación: 2025‑07‑12 – documento completo.
+==================================================== -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- ========================================= -->
-  <!-- Configuración básica                     -->
-  <!-- ========================================= -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Análisis de Infraestructura Crítica | ESGC</title>
-  <!-- SEO -->
-  <meta name="description" content="Mapa interactivo y análisis de la infraestructura crítica terrestre, marítima y aérea en el extremo sur de Argentina para operaciones conjuntas. Trabajo académico ESGC.">
-  <link rel="canonical" href="https://ejemplo.org/infraestructura-critica">
-  <!-- Recursos -->
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- ========================================= -->
-  <!-- Estilos globales                          -->
-  <!-- ========================================= -->
+  <!-- ===== Meta ===== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infraestructura Crítica | ESGC</title>
+
+  <!-- ===== Google Fonts ===== -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ===== FontAwesome ===== -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /></noscript>
+
+  <!-- ===== AOS (Animate On Scroll) CSS ===== -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <!-- ===== Estilos Propios ===== -->
   <style>
-    :root{
-      --color-bg:#ffffff;
-      --color-primary:#005dc1;
-      --color-secondary:#00b5e2;
-      --color-light:#f4f7fb;
-      --text-dark:#222;
-      --text-light:#ffffff;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Poppins',sans-serif;background:var(--color-bg);color:var(--text-dark);line-height:1.6;scroll-behavior:smooth}
-    h1,h2,h3{font-weight:600;color:var(--color-primary)}
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{width:90%;max-width:1200px;margin:0 auto}
-
-    /* === Header === */
-    header{position:relative;background:url('hero.jpg') center/cover no-repeat;height:55vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-light)}
-    header::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
-    header .hero-content{position:relative;z-index:1}
-    header h1{font-size:clamp(1.8rem,4vw,3rem);text-shadow:0 2px 6px rgba(0,0,0,.5)}
-
-    /* === Navbar === */
-    nav{position:fixed;top:0;left:0;width:100%;background:var(--color-bg);box-shadow:0 2px 4px rgba(0,0,0,.08);z-index:1000}
-    nav .nav-container{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem}
-    nav .logo{display:flex;align-items:center;gap:.5rem}
-    nav .logo img{height:38px}
-    nav ul{list-style:none;display:flex;gap:1.5rem}
-
-    /* === Sections === */
-    section{padding:4rem 0}
-    .section-title{text-align:center;margin-bottom:2rem}
-    .objetivo p{max-width:850px;margin:.5rem auto;font-weight:300}
-
-    /* Integrantes */
-    .integrantes ul{max-width:650px;margin:0 auto 2rem;list-style:none;padding-left:0}
-
-    /* Mapa */
-    .map-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
-    .map-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-
-    /* Cards */
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-    .card{background:var(--color-light);border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.05);padding:1.5rem;display:flex;flex-direction:column;gap:.8rem;transition:transform .3s ease}
-    .card:hover{transform:translateY(-4px)}
-    .badge-date{align-self:flex-start;background:var(--color-secondary);color:var(--text-light);padding:.2rem .6rem;border-radius:6px;font-size:.75rem;font-weight:600}
-
-    /* Footer */
-    footer{background:var(--color-bg);padding:2rem 0;border-top:1px solid #e5e5e5;margin-top:4rem;font-size:.875rem}
-    footer .footer-inner{display:flex;flex-direction:column;align-items:center;gap:1rem}
-    footer img.qr{height:90px;width:90px}
-    footer small{color:#666;text-align:center}
-
-    /* Responsive */
-    @media(max-width:600px){
-      .map-container{padding-bottom:75vh}
-      nav ul{display:none}
+    /* ----- Variables ----- */
+    :root {
+      --color-bg: #ffffff;
+      --color-primary: #005dc1; /* azul institucional */
+      --color-secondary: #00b5e2; /* celeste acento */
+      --color-light: #f8f9fa;
+      --text-dark: #333333;
+      --text-light: #ffffff;
+      --hero-overlay: rgba(0, 0, 0, 0.45);
     }
 
-    /* Scroll animation */
-    .animate-on-scroll{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-    .animate-on-scroll.is-visible{opacity:1;transform:none}
+    /* ----- Reset & Base ----- */
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--color-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    img {max-width: 100%; display: block;}
+    a {color: inherit; text-decoration: none;}
+    .container {width: 90%; max-width: 1200px; margin: 0 auto;}
+
+    /* ----- Navbar ----- */
+    header.navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--color-primary);
+      color: var(--text-light);
+      z-index: 999;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .nav__wrapper {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.5rem 1rem;
+    }
+    .nav__logo {display:flex; align-items:center; gap:0.5rem; font-weight:600; letter-spacing:0.5px;}
+    .nav__logo img {height:40px; width:auto;}
+    .nav__links {list-style:none; display:flex; gap:1.5rem; transition:transform 0.3s ease-in-out;}
+    .nav__links li a {font-weight:500; transition:opacity 0.2s;}
+    .nav__links li a:hover {opacity:0.8;}
+
+    /* ----- Hamburger (mobile) ----- */
+    .hamburger {display:none; font-size:1.5rem; cursor:pointer;}
+
+    /* ----- Hero ----- */
+    .hero {position:relative; display:flex; align-items:center; justify-content:center; text-align:center; height:100vh; color:var(--text-light); background:url('hero.jpg') center/cover fixed;}
+    .hero::before {content:''; position:absolute; inset:0; background:var(--hero-overlay);}    
+    .hero__content {position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0 1rem;}
+    .hero__shield {width:120px; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.4));}
+    .hero__title {font-size:clamp(1.8rem,4vw+1rem,3.5rem); font-weight:700; letter-spacing:1px;}
+    .hero__subtitle {font-size:clamp(1rem,2vw,1.25rem); font-weight:300; max-width:700px;}
+    .scroll-indicator {position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); font-size:1.5rem; animation:bounce 1.5s infinite;}
+    @keyframes bounce {0%,20%,50%,80%,100%{transform:translate(-50%,0);}40%{transform:translate(-50%,-10px);}60%{transform:translate(-50%,-5px);}}
+
+    /* ----- Sections ----- */
+    section {padding:5rem 0;}
+    section:nth-of-type(even) {background:var(--color-light);}  
+    .section__title {text-align:center; margin-bottom:2.5rem; font-size:2rem; color:var(--color-primary);}   
+
+    /* ----- Objetivo ----- */
+    .objetivo__text {text-align:center; font-size:1.1rem; max-width:900px; margin:0 auto;}
+
+    /* ----- Integrantes ----- */
+    .integrantes__list {list-style:none; padding:0; max-width:700px; margin:0 auto; font-size:1.05rem;}
+    .integrantes__list li {margin-bottom:0.5rem;}
+
+    /* ----- Componentes ----- */
+    .componentes__grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem;}
+    .card {background:#fff; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.06); padding:2rem 1.5rem; text-align:center; transition:transform 0.3s;}
+    .card:hover {transform:translateY(-6px);}    
+    .card i {font-size:2.2rem; color:var(--color-secondary); margin-bottom:1rem;}
+
+    /* ----- Mapa ----- */
+    .mapa__wrapper iframe {width:100%; height:480px; border:none; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.1);}    
+
+    /* ----- Galería ----- */
+    .galeria__grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem;}
+    .galeria__grid img {border-radius:8px; height:100%; object-fit:cover; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:transform 0.3s;}
+    .galeria__grid img:hover {transform:scale(1.03);}    
+
+    /* ----- Footer ----- */
+    footer {background:var(--color-primary); color:var(--text-light); text-align:center; padding:1.5rem 0; font-size:0.9rem;}
+
+    /* ----- Media Queries ----- */
+    @media(max-width:768px){
+      .hamburger{display:block;}
+      .nav__links{position:fixed; top:64px; right:0; width:70%; max-width:300px; background:var(--color-primary); flex-direction:column; align-items:flex-start; padding:1.5rem; gap:1rem; height:calc(100vh - 64px); transform:translateX(100%);}      
+      .nav__links.active{transform:translateX(0);}  
+    }
   </style>
 </head>
 <body>
-  <!-- === Navbar === -->
-  <nav>
-    <div class="nav-container container">
-      <div class="logo"><img src="assets/logo-esgc.svg" alt="ESGC Logo"><strong>ESGC</strong></div>
-      <ul>
-        <li><a href="#objetivo">Objetivo</a></li>
-        <li><a href="#mapa">Mapa</a></li>
-        <li><a href="#componentes">Componentes</a></li>
-        <li><a href="#integrantes">Equipo</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- === Hero === -->
-  <header>
-    <div class="hero-content container animate-on-scroll">
-      <h1>Análisis de Infraestructura Crítica</h1>
-      <p>Apoyo al Planeamiento Operacional Conjunto</p>
+  <!-- ===== Navbar ===== -->
+  <header class="navbar">
+    <div class="nav__wrapper container">
+      <a href="#" class="nav__logo">
+        <img src="esgc.png" alt="Escudo ESGC" />
+        ESGC
+      </a>
+      <nav>
+        <ul class="nav__links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#objetivo">Objetivo</a></li>
+          <li><a href="#integrantes">Integrantes</a></li>
+          <li><a href="#componentes">Componentes</a></li>
+          <li><a href="#mapa">Mapa</a></li>
+          <li><a href="#conclusiones">Conclusiones</a></li>
+          <li><a href="#galeria">Galería</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
     </div>
   </header>
 
-  <!-- === Objetivo === -->
-  <section id="objetivo" class="objetivo animate-on-scroll">
-    <div class="container">
-      <h2 class="section-title">Objetivo</h2>
-      <p>Identificar y analizar la <strong>infraestructura crítica</strong> del Teatro Sur (Chubut, Santa Cruz y Tierra del Fuego) y evaluar su utilidad para operaciones conjuntas en el nivel operacional.</p>
+  <!-- ===== Hero ===== -->
+  <header class="hero" id="inicio">
+    <div class="hero__content" data-aos="fade-down">
+      <img src="esgc.png" alt="Escudo ESGC" class="hero__shield" />
+      <h1 class="hero__title">Infraestructura Crítica</h1>
+      <p class="hero__subtitle">Identificación y análisis de la infraestructura crítica en el extremo sur de Argentina: Chubut, Santa Cruz y Tierra del Fuego.</p>
+    </div>
+    <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+  </header>
+
+  <!-- ===== Objetivo ===== -->
+  <section id="objetivo">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section__title">Objetivo</h2>
+      <p class="objetivo__text">
+        Identificar y analizar la infraestructura crítica en el extremo sur del territorio nacional (provincias de Chubut, Santa Cruz y Tierra del Fuego), evaluando su utilidad para operaciones conjuntas en el nivel operacional.
+      </p>
     </div>
   </section>
 
-  <!-- === Mapa === -->
-  <section id="mapa" class="animate-on-scroll">
-    <div class="container">
-      <h2 class="section-title">Mapa Interactivo</h2>
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1gLgsxj1jHuB1KcIN22Kdq2cIBDU0sC8&ehbc=2E312F" loading="lazy" title="Mapa de Infraestructura Crítica"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- === Componentes === -->
-  <section id="componentes" class="animate-on-scroll">
-    <div class="container">
-      <h2 class="section-title">Componentes</h2>
-      <div class="cards">
-        <article class="card"><span class="badge-date">Actualizado 06/2025</span><h3>Componente Terrestre</h3><p>Rutas críticas (RN 3, RP 1, RP 40), puentes clave y nodos ferroviarios con capacidad &gt;40 Tn.</p></article>
-        <article class="card"><span class="badge-date">Actualizado 06/2025</span><h3>Componente Marítimo</h3><p>Puertos de Comodoro Rivadavia, Puerto Deseado y Ushuaia: calados &gt;10 m, grúas pórtico y bunkering.</p></article>
-        <article class="card"><span class="badge-date">Actualizado 06/2025</span><h3>Componente Aéreo</h3><p>Aeródromos estratégicos (CRD, RGL, USH): pistas &gt;2400 m, reabastecimiento en caliente y hangares climatizados.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- === Integrantes === -->
-  <section id="integrantes" class="integrantes animate-on-scroll">
-    <div class="container">
-      <h2 class="section-title">Equipo de Trabajo</h2>
-      <ul>
-        <li><strong>MY Vanesa PIA</strong> – Componente Terrestre</li>
-        <li><strong>CC Sebastián POLEMANN</strong> – Componente Marítimo</li>
-        <li><strong>MY Darío BASILE</strong> – Componente Aéreo</li>
+  <!-- ===== Integrantes ===== -->
+  <section id="integrantes">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section__title">Integrantes</h2>
+      <ul class="integrantes__list">
+        <li><strong>MY Vanesa PIA</strong> — Infraestructura Crítica Terrestre</li>
+        <li><strong>CC Sebastián POLEMANN</strong> — Infraestructura Crítica Marítima</li>
+        <li><strong>MY Darío BASILE</strong> — Infraestructura Crítica Aérea</li>
+        <li><strong>Profesor:</strong> CR (R) Ing. Ignacio PERALTA</li>
       </ul>
-      <p>Profesor responsable: <strong>CR (R) Ing. Ignacio PERALTA</strong>.</p>
     </div>
   </section>
 
-  <!-- === Footer === -->
-  <footer>
-    <div class="container footer-inner">
-      <img src="assets/qr-infraestructura-critica.png" alt="Código QR" class="qr">
-      <small>Trabajo académico – Logística Operativa, ESGC. Uso educativo, sin fines comerciales.<br>Imágenes Unsplash &amp; Google My Maps.</small>
+  <!-- ===== Componentes ===== -->
+  <section id="componentes">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section__title">Componentes</h2>
+      <div class="componentes__grid">
+        <div class="card" data-aos="zoom-in">
+          <i class="fas fa-landmark"></i>
+          <h3>Terrestre</h3>
+          <p>Análisis de rutas, puentes, pasos fronterizos y nodos logísticos críticos.</p>
+        </div>
+        <div class="card" data-aos="zoom-in" data-aos-delay="100">
+          <i class="fas fa-water"></i>
+          <h3>Marítimo</h3>
+          <p>Puertos, vías navegables y capacidades de proyección marítima estratégica.</p>
+        </div>
+        <div class="card" data-aos="zoom-in" data-aos-delay="200">
+          <i class="fas fa-plane"></i>
+          <h3>Aéreo</h3>
+          <p>Aeropuertos, aeródromos y corredores aéreos clave para soporte de operaciones.</p>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- ===== Mapa ===== -->
+  <section id="mapa">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section__title">Mapa Interactivo</h2>
+      <div class="mapa__wrapper">
+        <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1gLgsxj1jHuB1KcIN22Kdq2cIBDU0sC8&ehbc=2E312F" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Conclusiones ===== -->
+  <section id="conclusiones">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section__title">Conclusiones</h2>
+      <p>
+        Este estudio multidimensional, doctrinariamente fundamentado, identifica las infraestructuras críticas relevantes para el sostenimiento logístico en las provincias de Chubut, Santa Cruz y Tierra del Fuego, proporcionando insumos esenciales para el planeamiento operacional conjunto.
+      </p>
+      <p>
+        <strong>Componente terrestre:</strong> la Ruta Nacional 3 constituye el principal eje logístico longitudinal, pero carece de rutas redundantes; la red secundaria necesita mejoras. Los ferrocarriles ofrecen apoyo limitado y los ductos de hidrocarburos, si bien valiosos, son altamente vulnerables.
+      </p>
+      <p>
+        <strong>Componente marítimo:</strong> los puertos de Ushuaia, Comodoro Rivadavia, Puerto Madryn, Punta Quilla y Puerto Deseado concentran la mayor capacidad operativa y uso dual. Terminales menores como Rawson y Río Grande cumplen funciones locales pero pueden integrarse como apoyo.
+      </p>
+      <p>
+        <strong>Componente aéreo:</strong> las X y IX Brigadas Aéreas, junto a la Base Aeronaval Río Grande, son nodos de proyección clave; muchos aeródromos secundarios requieren ampliaciones en pista, iluminación y servicios, y la cobertura sanitaria militar resulta insuficiente.
+      </p>
+      <p>
+        Se establecieron criterios de priorización basados en relevancia operacional, accesibilidad, vulnerabilidad estructural y uso dual, orientando la protección y el empleo de estos activos. El trabajo ofrece una línea base actualizada para planificar y sostener operaciones en el Teatro Sur.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Galería ===== -->
+  <section id="galeria">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section__title">Galería Operacional</h2>
+      <div class="galeria__grid">
+        <img src="hero.jpg" alt="Operación aérea" />
+        <img src="151118-Comandos_0428.jpg" alt="Operación comandos" />
+        <img src="hero.jpg" alt="Pista de helicópteros" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>© 2025 Escuela Superior de Guerra Conjunta de las Fuerzas Armadas. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- === Script Animación Scroll === -->
+  <!-- ===== Scripts ===== -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    (function(){
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-visible');},{threshold:.1}));
-      document.querySelectorAll('.animate-on-scroll').forEach(el=>observer.observe(el));
-    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      // Menú móvil
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav__links');
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        hamburger.querySelector('i').classList.toggle('fa-bars');
+        hamburger.querySelector('i').classList.toggle('fa-times');
+      });
+
+      // AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({ once: true });
+      }
+    });
   </script>
 </body>
 </html>
